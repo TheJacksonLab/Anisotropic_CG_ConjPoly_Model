@@ -1,0 +1,58 @@
+#trying to just see how one polymer chain moves
+
+dimension	3
+units 		lj	
+atom_style	hybrid full ellipsoid
+boundary 	p p p
+
+bond_style	hybrid harmonic eldihedral
+
+angle_style 	harmonic
+dihedral_style	none
+improper_style	none
+
+pair_style gayberne 1.0 1.0 1.0 4.0
+fix prop all property/atom i_coreid
+read_data "v5_nosc.data" fix prop NULL CoreIDs
+
+special_bonds lj 0.0 1.0 1.0
+
+pair_coeff 1 1 1.0 1.0 0.1 1.0 0.25 0.1 1.0 0.25
+pair_coeff 2 2 0.0 1.0 1 1 1 1 1 1
+pair_coeff * 2 0 1.0 0 0 0 0 0 0
+
+bond_coeff 1 harmonic 0.0 0.5
+bond_coeff 2 harmonic 20.0 0.2
+bond_coeff 3 eldihedral 0 3.0 0 0
+
+angle_coeff 1 3.0 180.0
+
+group disks type 1 2
+
+group ell type 1
+group bondSites type 2
+
+neigh_modify delay 0 every 1 check no
+
+fix 1 all rigid/nve/small custom i_coreid
+fix 2 ell langevin 1.5 1.5 2 1 angmom 1.0
+fix drift all momentum 10000 linear 1 1 1 angular rescale
+
+restart 1000000 restarts_v5/equil.*.rst
+
+compute ta ell temp/asphere dof all
+compute rot all erotate/rigid 1
+compute kin all ke/rigid 1
+
+compute op ell property/atom quati quatj quatk quatw
+compute shape ell property/atom shapex shapey shapez
+dump 1 ell custom 100000 ovito.dump id type xu yu zu c_op[1] c_op[2] c_op[3] c_op[4] c_shape[1] c_shape[2] c_shape[3]
+dump 2 all custom 100000 ovito_all.dump id type xu yu zu
+
+timestep 0.001
+
+thermo_style custom step temp c_ta epair ebond eangle etotal press pe ke c_rot c_kin
+
+thermo 10000
+
+run 20000000
