@@ -1,5 +1,5 @@
 # Anisotropic_CG_ConjPoly_Model
-LAMMPS Implementation of the anisotropic coarse-grained model for conjugated polymers.  Corresponds to a minimal version of the model used in the follow papers (please cite these two for model usage):
+LAMMPS Implementation of the anisotropic coarse-grained model for conjugated polymers.  Corresponds to a minimal version of the model used in the follow papers (please cite Cohen paper for model usage):
 
 Friday, D.M.; Jackson, N.E. “Electron and Ion Transport in Semi-Dilute Conjugated Polyelectrolytes: View from a Coarse-Grained Tight-Binding Model” Mol. Syst. Des. Eng., 2023, 8, 743-755.
 
