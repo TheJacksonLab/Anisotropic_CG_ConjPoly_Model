@@ -1,1 +1,28 @@
+# MD Trajectory Processing
+
+A collection of Python scripts for processing molecular dynamics (MD) trajectories to extract key physical insights, including:
+
+* **Structure Factor Calculation**
+* **Tight-binding Hamiltonian Construction**
+* **Charge Carrier Mobility Calculation**
+
+## Overview
+
+This repository provides a suite of scripts designed to automate the post-processing of molecular dynamics trajectories and compute several important physical quantities relevant for charge transport studies.
+
+## Scripts Description
+
+* **`a2nobond.py`**: Reads MD trajectory, creats input file for electrostatic potential calculation of anisotropic backbone beads in LAMMPS.
+* **`a3extracttrjs.py`**: Crops MD trajectory and corresponding electrostatic potential info for further analysis.
+* **`a4RDF_struf.py` and `a_4RDF_struf_def.py`**: Calculates time-averaged radial distribution function and time-averaged structure factor.
+* **`a4bbpot_ovito.py` and `a_4bbpot_ovito.py`**: Constructs tight binding Hamiltonian, calculates eigenvectors and eigenvalues, outputs MD trajectory with molecular orbitals.
+* **`a4bbpot_percolate.py` and `a_4bbpot_percolate.py`**: Analyzes polymer network connectivity based on through-space coupling strength.
+* **`a4bundles.py` and `a_4bundles_def.py`**: Calculates fiber thickness for further characterization of polymer network.
+* **`a4lammps.py` and `a_4lammps.py`**: Analyzes system energies.
+* **`a4ovito.py` and `a_4ovito.py`**: Calculates autocorrelation of radius of gyration, end-to-end distance, end-to-end vectors, and bond vectors, computes polymer diffusion constant and anion diffusion constant.
+* **`a5mobility.py` and `a_5electronic_transport.py`**: Computes hole mobility based on tight binding Hamiltonian and semiclassical rate theory.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
